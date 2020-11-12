@@ -1,0 +1,288 @@
+Current configuration : 5810 bytes
+!
+version 15.0
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+service compress-config
+!
+hostname JPL
+!
+boot-start-marker
+boot host bootflash:startup-config
+boot system bootflash:startup-config
+boot config bootflash:startup-config
+boot-end-marker
+!
+enable secret 5 
+enable password 7 
+!
+username user privilege 15 password 7 
+!
+!         
+no aaa new-model
+ip subnet-zero
+ip vrf mgmtVrf
+!         
+!         
+!         
+vtp domain test-02
+vtp mode transparent
+!         
+!         
+!         
+power redundancy-mode redundant
+!         
+!         
+!         
+spanning-tree mode pvst
+spanning-tree extend system-id
+!         
+vlan internal allocation policy ascending
+!         
+vlan 20,30,40,50,60,70,80,159-160 
+!         
+!         
+!         
+interface FastEthernet1
+ ip vrf forwarding mgmtVrf
+ ip address 192.168.22.2 255.255.255.0
+ speed auto
+ duplex auto
+!         
+interface GigabitEthernet1/1
+ switchport access vlan 20
+ switchport mode access
+!         
+interface GigabitEthernet1/2
+ switchport access vlan 20
+ switchport mode access
+!         
+interface GigabitEthernet1/3
+ switchport access vlan 20
+ switchport mode access
+!         
+interface GigabitEthernet1/4
+ switchport access vlan 20
+ switchport mode access
+!         
+interface GigabitEthernet1/5
+ switchport access vlan 20
+ switchport mode access
+!         
+interface GigabitEthernet1/6
+ switchport access vlan 20
+ switchport mode access
+!         
+interface GigabitEthernet1/7
+ switchport access vlan 20
+ switchport mode access
+!         
+interface GigabitEthernet1/8
+ switchport access vlan 20
+ switchport mode access
+!         
+interface GigabitEthernet1/9
+ switchport access vlan 20
+ switchport mode access
+!         
+interface GigabitEthernet1/10
+ switchport access vlan 20
+ switchport mode access
+!         
+interface GigabitEthernet1/11
+ switchport access vlan 20
+ switchport mode access
+!         
+interface GigabitEthernet1/12
+ switchport access vlan 20
+ switchport mode access
+!         
+interface GigabitEthernet1/13
+ switchport access vlan 30
+ switchport mode access
+!         
+interface GigabitEthernet1/14
+ switchport access vlan 30
+ switchport mode access
+!         
+interface GigabitEthernet1/15
+ switchport access vlan 30
+ switchport mode access
+!         
+interface GigabitEthernet1/16
+ switchport access vlan 30
+ switchport mode access
+!         
+interface GigabitEthernet1/17
+ switchport access vlan 30
+ switchport mode access
+!         
+interface GigabitEthernet1/18
+ switchport access vlan 30
+ switchport mode access
+!         
+interface GigabitEthernet1/19
+ switchport access vlan 30
+ switchport mode access
+!         
+interface GigabitEthernet1/20
+ switchport access vlan 30
+ switchport mode access
+!         
+interface GigabitEthernet1/21
+ switchport access vlan 30
+ switchport mode access
+!         
+interface GigabitEthernet1/22
+ switchport access vlan 30
+ switchport mode access
+!         
+interface GigabitEthernet1/23
+ switchport access vlan 30
+ switchport mode access
+!         
+interface GigabitEthernet1/24
+ switchport access vlan 30
+ switchport mode access
+!         
+interface GigabitEthernet1/25
+ switchport access vlan 40
+ switchport mode access
+!         
+interface GigabitEthernet1/26
+ switchport access vlan 40
+ switchport mode access
+!         
+interface GigabitEthernet1/27
+ switchport access vlan 40
+ switchport mode access
+!         
+interface GigabitEthernet1/28
+ switchport access vlan 40
+ switchport mode access
+!         
+interface GigabitEthernet1/29
+ switchport access vlan 40
+ switchport mode access
+!         
+interface GigabitEthernet1/30
+ switchport access vlan 40
+ switchport mode access
+!         
+interface GigabitEthernet1/31
+ switchport access vlan 40
+ switchport mode access
+!         
+interface GigabitEthernet1/32
+ switchport access vlan 40
+ switchport mode access
+!         
+interface GigabitEthernet1/33
+ switchport access vlan 40
+ switchport mode access
+!         
+interface GigabitEthernet1/34
+ switchport access vlan 40
+ switchport mode access
+!         
+interface GigabitEthernet1/35
+ switchport access vlan 40
+ switchport mode access
+!         
+interface GigabitEthernet1/36
+ switchport access vlan 40
+ switchport mode access
+!         
+interface GigabitEthernet1/37
+ switchport access vlan 50
+ switchport mode access
+!         
+interface GigabitEthernet1/38
+ switchport access vlan 50
+ switchport mode access
+!         
+interface GigabitEthernet1/39
+ switchport access vlan 50
+ switchport mode access
+!         
+interface GigabitEthernet1/40
+ switchport access vlan 50
+ switchport mode access
+!         
+interface GigabitEthernet1/41
+ switchport access vlan 50
+ switchport mode access
+!         
+interface GigabitEthernet1/42
+ switchport access vlan 50
+ switchport mode access
+!         
+interface GigabitEthernet1/43
+ switchport access vlan 50
+ switchport mode access
+!         
+interface GigabitEthernet1/44
+ switchport access vlan 50
+ switchport mode access
+!         
+interface GigabitEthernet1/45
+ switchport access vlan 50
+ switchport mode access
+ media-type rj45
+!         
+interface GigabitEthernet1/46
+ switchport access vlan 50
+ switchport mode access
+ media-type rj45
+!         
+interface GigabitEthernet1/47
+ switchport access vlan 50
+ switchport mode access
+ media-type rj45
+!         
+interface GigabitEthernet1/48
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ media-type rj45
+!         
+interface Vlan1
+ ip address 192.168.2.2 255.255.255.0
+!         
+interface Vlan20
+ no ip address
+ shutdown 
+!         
+ip default-gateway 192.168.2.1
+no ip http server
+no ip http secure-server
+!         
+!         
+!         
+!         
+!         
+!         
+control-plane
+!         
+banner login ^C
+               **** *****************,  ****               
+               **** ******************* ****               
+               **** ****.          **** ****               
+               **** ****.          **** ****               
+               **** ****.  ***********, ****               
+               **** ****.               ****               
+               **** ****.               ****               
+,,,,,,,,,,,,,****** ****.               ******,,,,,,,,,,,,,
+ ****************,  ****.                ****************, ^C
+banner motd ^C
+ Welcome to ^C
+!         
+line con 0
+ login local
+ stopbits 1
+line vty 0 5
+ login local
+!         
+end       
+
