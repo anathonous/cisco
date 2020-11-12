@@ -1,0 +1,410 @@
+
+!
+version 15.3
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname Goldstone
+!
+!
+logging rate-limit console 9
+!
+aaa new-model
+!
+!
+aaa authentication login default local
+aaa authorization exec default local 
+!
+!
+!
+!
+!
+aaa session-id common
+clock timezone -0600 -6 0
+no ip source-route
+no ip cef
+ip domain name goldstone
+!
+!
+!
+!
+dot11 pause-time 100
+dot11 syslog
+dot11 vlan-name DesktopLAN vlan 20
+dot11 vlan-name ManagementVMminus vlan 60
+dot11 vlan-name PhoenixVPN1 vlan 40
+dot11 vlan-name PhoenixVPN2 vlan 50
+dot11 vlan-name UNTrusted vlan 30
+dot11 vlan-name VMInside vlan 80
+dot11 vlan-name VMOutside vlan 70
+!
+dot11 ssid Galileo
+   vlan 30
+   authentication open 
+   authentication key-management wpa version 2
+   accounting acct_methods
+   mbssid guest-mode
+   wpa-psk ascii 7 
+   information-element ssidl
+!
+dot11 ssid Goldstone
+   vlan 20
+   authentication open 
+   authentication key-management wpa version 2
+   accounting acct_methods
+   guest-mode
+   mbssid guest-mode
+   wpa-psk ascii 7 
+   information-element ssidl
+!
+dot11 ssid Voyager 1
+   vlan 40
+   authentication open 
+   authentication key-management wpa version 2
+   accounting acct_methods
+   mbssid guest-mode
+   mobility network-id 40
+   wpa-psk ascii 7 
+   information-element ssidl
+!
+dot11 ssid Voyager 2
+   vlan 50
+   authentication open 
+   authentication key-management wpa version 2
+   mbssid guest-mode
+   mobility network-id 50
+   wpa-psk ascii 7 
+   information-element ssidl
+!
+!
+dot11 network-map
+!
+no ipv6 cef
+!
+crypto pki trustpoint TP-self-signed-3939973995
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-3939973995
+ revocation-check none
+ rsakeypair TP-self-signed-3939973995
+!
+!
+crypto pki certificate chain 
+username user privilege 15 secret 5 
+!
+!
+bridge irb
+!
+!
+!
+interface Dot11Radio0
+ no ip address
+ !
+ encryption vlan 20 mode ciphers aes-ccm tkip 
+ !
+ encryption vlan 30 mode ciphers aes-ccm tkip 
+ !
+ encryption vlan 40 mode ciphers aes-ccm tkip 
+ !
+ encryption vlan 50 mode ciphers aes-ccm tkip 
+ !
+ encryption vlan 60 mode ciphers aes-ccm tkip 
+ !
+ encryption vlan 70 mode ciphers aes-ccm tkip 
+ !
+ encryption vlan 80 mode ciphers aes-ccm tkip 
+ !
+ ssid Galileo
+ !
+ ssid Goldstone
+ !
+ ssid Voyager 1
+ !
+ ssid Voyager 2
+ !
+ antenna gain 0
+ traffic-metrics aggregate-report
+ stbc
+ mbssid
+ speed  basic-36.0 48.0 54.0 m19. m20. m21. m22. m23.
+ station-role root
+ beacon privacy guest-mode
+ world-mode dot11d country-code CA indoor
+ infrastructure-client
+ bridge-group 1
+ bridge-group 1 subscriber-loop-control
+ bridge-group 1 spanning-disabled
+ bridge-group 1 block-unknown-source
+ no bridge-group 1 source-learning
+ no bridge-group 1 unicast-flooding
+!
+interface Dot11Radio0.20
+ encapsulation dot1Q 20
+ bridge-group 20
+ bridge-group 20 subscriber-loop-control
+ bridge-group 20 spanning-disabled
+ bridge-group 20 block-unknown-source
+ no bridge-group 20 source-learning
+ no bridge-group 20 unicast-flooding
+!
+interface Dot11Radio0.30
+ encapsulation dot1Q 30
+ bridge-group 30
+ bridge-group 30 subscriber-loop-control
+ bridge-group 30 spanning-disabled
+ bridge-group 30 block-unknown-source
+ no bridge-group 30 source-learning
+ no bridge-group 30 unicast-flooding
+!
+interface Dot11Radio0.40
+ encapsulation dot1Q 40
+ bridge-group 40
+ bridge-group 40 subscriber-loop-control
+ bridge-group 40 spanning-disabled
+ bridge-group 40 block-unknown-source
+ no bridge-group 40 source-learning
+ no bridge-group 40 unicast-flooding
+!
+interface Dot11Radio0.50
+ encapsulation dot1Q 50
+ bridge-group 50
+ bridge-group 50 subscriber-loop-control
+ bridge-group 50 spanning-disabled
+ bridge-group 50 block-unknown-source
+ no bridge-group 50 source-learning
+ no bridge-group 50 unicast-flooding
+!
+interface Dot11Radio0.60
+ encapsulation dot1Q 60
+ bridge-group 60
+ bridge-group 60 subscriber-loop-control
+ bridge-group 60 spanning-disabled
+ bridge-group 60 block-unknown-source
+ no bridge-group 60 source-learning
+ no bridge-group 60 unicast-flooding
+!
+interface Dot11Radio0.70
+ encapsulation dot1Q 70
+ bridge-group 70
+ bridge-group 70 subscriber-loop-control
+ bridge-group 70 spanning-disabled
+ bridge-group 70 block-unknown-source
+ no bridge-group 70 source-learning
+ no bridge-group 70 unicast-flooding
+!
+interface Dot11Radio0.80
+ encapsulation dot1Q 80
+ bridge-group 80
+ bridge-group 80 subscriber-loop-control
+ bridge-group 80 spanning-disabled
+ bridge-group 80 block-unknown-source
+ no bridge-group 80 source-learning
+ no bridge-group 80 unicast-flooding
+!
+interface Dot11Radio1
+ no ip address
+ !
+ encryption vlan 20 mode ciphers aes-ccm tkip 
+ !
+ encryption vlan 30 mode ciphers aes-ccm tkip 
+ !
+ encryption vlan 40 mode ciphers aes-ccm tkip 
+ !
+ encryption vlan 50 mode ciphers aes-ccm tkip 
+ !
+ encryption vlan 60 mode ciphers aes-ccm tkip 
+ !
+ encryption vlan 70 mode ciphers aes-ccm tkip 
+ !
+ encryption vlan 80 mode ciphers aes-ccm tkip 
+ !
+ ssid Galileo
+ !
+ ssid Goldstone
+ !
+ ssid Voyager 1
+ !
+ ssid Voyager 2
+ !
+ antenna gain 0
+ peakdetect
+ dfs band 3 block
+ stbc
+ mbssid
+ speed  basic-48.0 54.0 m19. m20. m21. m22. m23.
+ channel dfs
+ station-role root
+ beacon privacy guest-mode
+ world-mode dot11d country-code CA both
+ bridge-group 1
+ bridge-group 1 subscriber-loop-control
+ bridge-group 1 spanning-disabled
+ bridge-group 1 block-unknown-source
+ no bridge-group 1 source-learning
+ no bridge-group 1 unicast-flooding
+!
+interface Dot11Radio1.20
+ encapsulation dot1Q 20
+ bridge-group 20
+ bridge-group 20 subscriber-loop-control
+ bridge-group 20 spanning-disabled
+ bridge-group 20 block-unknown-source
+ no bridge-group 20 source-learning
+ no bridge-group 20 unicast-flooding
+!
+interface Dot11Radio1.30
+ encapsulation dot1Q 30
+ bridge-group 30
+ bridge-group 30 subscriber-loop-control
+ bridge-group 30 spanning-disabled
+ bridge-group 30 block-unknown-source
+ no bridge-group 30 source-learning
+ no bridge-group 30 unicast-flooding
+!
+interface Dot11Radio1.40
+ encapsulation dot1Q 40
+ bridge-group 40
+ bridge-group 40 subscriber-loop-control
+ bridge-group 40 spanning-disabled
+ bridge-group 40 block-unknown-source
+ no bridge-group 40 source-learning
+ no bridge-group 40 unicast-flooding
+!
+interface Dot11Radio1.50
+ encapsulation dot1Q 50
+ bridge-group 50
+ bridge-group 50 subscriber-loop-control
+ bridge-group 50 spanning-disabled
+ bridge-group 50 block-unknown-source
+ no bridge-group 50 source-learning
+ no bridge-group 50 unicast-flooding
+!
+interface Dot11Radio1.60
+ encapsulation dot1Q 60
+ bridge-group 60
+ bridge-group 60 subscriber-loop-control
+ bridge-group 60 spanning-disabled
+ bridge-group 60 block-unknown-source
+ no bridge-group 60 source-learning
+ no bridge-group 60 unicast-flooding
+!
+interface Dot11Radio1.70
+ encapsulation dot1Q 70
+ bridge-group 70
+ bridge-group 70 subscriber-loop-control
+ bridge-group 70 spanning-disabled
+ bridge-group 70 block-unknown-source
+ no bridge-group 70 source-learning
+ no bridge-group 70 unicast-flooding
+!
+interface Dot11Radio1.80
+ encapsulation dot1Q 80
+ bridge-group 80
+ bridge-group 80 subscriber-loop-control
+ bridge-group 80 spanning-disabled
+ bridge-group 80 block-unknown-source
+ no bridge-group 80 source-learning
+ no bridge-group 80 unicast-flooding
+!
+interface GigabitEthernet0
+ no ip address
+ duplex auto
+ speed auto
+ bridge-group 1
+ bridge-group 1 spanning-disabled
+ no bridge-group 1 source-learning
+!
+interface GigabitEthernet0.20
+ encapsulation dot1Q 20
+ bridge-group 20
+ bridge-group 20 spanning-disabled
+ no bridge-group 20 source-learning
+!
+interface GigabitEthernet0.30
+ encapsulation dot1Q 30
+ bridge-group 30
+ bridge-group 30 spanning-disabled
+ no bridge-group 30 source-learning
+!
+interface GigabitEthernet0.40
+ encapsulation dot1Q 40
+ bridge-group 40
+ bridge-group 40 spanning-disabled
+ no bridge-group 40 source-learning
+!
+interface GigabitEthernet0.50
+ encapsulation dot1Q 50
+ bridge-group 50
+ bridge-group 50 spanning-disabled
+ no bridge-group 50 source-learning
+!
+interface GigabitEthernet0.60
+ encapsulation dot1Q 60
+ bridge-group 60
+ bridge-group 60 spanning-disabled
+ no bridge-group 60 source-learning
+!
+interface GigabitEthernet0.70
+ encapsulation dot1Q 70
+ bridge-group 70
+ bridge-group 70 spanning-disabled
+ no bridge-group 70 source-learning
+!
+interface GigabitEthernet0.80
+ encapsulation dot1Q 80
+ bridge-group 80
+ bridge-group 80 spanning-disabled
+ no bridge-group 80 source-learning
+!
+interface BVI1
+ mac-address f872.ead7.3b6b
+ ip address 192.168.2.6 255.255.255.0
+ ipv6 address dhcp
+ ipv6 address autoconfig
+!
+ip default-gateway 192.168.2.1
+ip forward-protocol nd
+no ip http server
+ip http authentication aaa
+ip http secure-server
+ip http help-path http://www.cisco.com/warp/public/779/smbiz/prodconfig/help/eag
+!
+!
+!
+access-list 111 permit tcp any any neq telnet
+bridge 1 route ip
+!
+!
+banner login 
+Welcome to
+
+ .              +   .                .   . .     .  .
+                   .                    .       .     *
+  .       *                        . . . .  .   .  + .
+            "You Are Here"            .   .  +  . . .
+.                 |             .  .   .    .    . .
+                  |           .     .     . +.    +  .
+                 \|/            .       .   . .
+        . .       V          .    * . . .  .  +   .
+           +      .           .   .      +
+                            .       . +  .+. .
+  .                      .     . + .  . .     .      .
+           .      .    .     . .   . . .        ! /
+      *             .    . .  +    .  .       - O -
+          .     .    .  +   . .  *  .       . / |
+               . + .  .  .  .. +  .
+.      .  .  .  *   .  *  . +..  .            *
+ .      .   . .   .   .   . .  +   .    .            +
+Goldstone 
+banner motd 
+
+!
+line con 0
+ access-class 111 in
+line vty 0 4
+ access-class 111 in
+ transport input all
+!
+sntp broadcast client
+end
